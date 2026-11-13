@@ -3,44 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Projeto #7 — P26-2B-23DA-3A7A-20A1-620C</title>
+  <title>Memória Código ↔ Saída · P26-2B-23DA-3A7A-20A1-620C</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
   <header class="topbar">
     <div class="topbar-inner">
-      <div>
-        <strong>Projeto #7: Jogo da Memória Temático</strong>
-      </div>
-      <div class="discord-badge" id="discordProfile">
-        <span id="discordUserText">Discord OAuth2 · Conectado</span>
-      </div>
+      <div class="brand">Memória Código ↔ Saída</div>
+      <div class="user-area" id="userArea"></div>
     </div>
   </header>
 
   <main>
-    <section class="card">
-      <span class="pill">Projeto Oficial #7</span>
-      <h1>Jogo da Memória Temático</h1>
-      <p class="desc">Projete um jogo de memória baseado em pares de cartas que exigem correspondência visual ou conceitual (ex: código e sua saída). A interface deve empregar transformações CSS 3D acionadas via JavaScript vanilla para o efeito de virar as cartas, mantendo o cabeçalho com os dados do usuário obtidos via login do Discord. A disposição das cartas é embaralhada no servidor Cloudflare no início da sessão, enviando apenas identificadores opacos para o frontend. Quando o jogador seleciona duas cartas, uma requisição consulta o backend para verificar se os identificadores formam um par válido, incrementando o contador de movimentos no banco D1 e registrando a eficiência do jogador ao descobrir todos os pares.</p>
-
-      <div class="form-row">
-        <input class="input-text" id="recordInput" type="text" placeholder="Digite um registro para gravar na Cloudflare Function + D1...">
-        <button class="btn-primary" id="sendBtn" type="button">Registrar no Cloudflare D1</button>
-      </div>
-      <div id="statusMessage" style="font-size:0.88rem;font-weight:700;color:#166534;margin-bottom:0.75rem;"></div>
+    <section id="loggedOut" class="panel center" hidden>
+      <h1>Jogo da Memória: Código ↔ Saída</h1>
+      <p>Encontre os pares: cada trecho de código combina com a saída que ele produz.</p>
+      <a class="btn" href="/api/auth/discord">Entrar com Discord</a>
+      <p id="authMessage" class="message" role="alert"></p>
     </section>
 
-    <section class="card">
-      <h2 style="font-size:1.15rem;font-weight:800;margin-bottom:0.85rem;">Registros Persistidos (Cloudflare Pages Functions + D1)</h2>
-      <ul class="records-list" id="recordsList">
-        <li>Carregando status da API serverless...</li>
-      </ul>
+    <section id="gameArea" hidden>
+      <div class="stats">
+        <div class="stat"><span class="stat-label">Movimentos</span><span class="stat-value" id="moves">0</span></div>
+        <div class="stat"><span class="stat-label">Pares</span><span class="stat-value" id="pairs">0/0</span></div>
+        <div class="stat"><span class="stat-label">Tempo</span><span class="stat-value" id="time">00:00</span></div>
+        <button class="btn" id="newGameBtn" type="button">Nova partida</button>
+      </div>
+
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+      <div id="board" class="board" aria-label="Tabuleiro de cartas"></div>
     </section>
   </main>
 
   <footer id="projectFooter">
-    Chave Única de Auditoria: <code>P26-2B-23DA-3A7A-20A1-620C</code> · Turma 2B · Licenciado sob MIT
+    Chave Única de Auditoria: <code>P26-2B-23DA-3A7A-20A1-620C</code> · Turma 2B · Licença MIT
   </footer>
 
   <script src="/app.js"></script>
